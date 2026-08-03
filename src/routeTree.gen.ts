@@ -9,24 +9,35 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as PesquisaTransicaoCarreiraRouteImport } from './routes/pesquisa-transicao-carreira'
-import { Route as NewsSitemapDotxmlRouteImport } from './routes/news-sitemap[.]xml'
-import { Route as BuscaRouteImport } from './routes/busca'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BuscaRouteImport } from './routes/busca'
+import { Route as NewsSitemapDotxmlRouteImport } from './routes/news-sitemap[.]xml'
+import { Route as PesquisaTransicaoCarreiraRouteImport } from './routes/pesquisa-transicao-carreira'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
-import { Route as PerfilSlugRouteImport } from './routes/perfil.$slug'
-import { Route as MateriaSlugRouteImport } from './routes/materia.$slug'
-import { Route as InstitucionalPageRouteImport } from './routes/institucional.$page'
-import { Route as CategoriaSlugRouteImport } from './routes/categoria.$slug'
-import { Route as AdminPesquisaRouteImport } from './routes/admin.pesquisa'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
-import { Route as AdminMateriasNovaRouteImport } from './routes/admin.materias.nova'
+import { Route as AdminPesquisaRouteImport } from './routes/admin.pesquisa'
+import { Route as CategoriaSlugRouteImport } from './routes/categoria.$slug'
+import { Route as InstitucionalPageRouteImport } from './routes/institucional.$page'
+import { Route as MateriaSlugRouteImport } from './routes/materia.$slug'
+import { Route as PerfilSlugRouteImport } from './routes/perfil.$slug'
 import { Route as AdminMateriasSlugRouteImport } from './routes/admin.materias.$slug'
+import { Route as AdminMateriasNovaRouteImport } from './routes/admin.materias.nova'
 
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BuscaRoute = BuscaRouteImport.update({
+  id: '/busca',
+  path: '/busca',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsSitemapDotxmlRoute = NewsSitemapDotxmlRouteImport.update({
+  id: '/news-sitemap.xml',
+  path: '/news-sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PesquisaTransicaoCarreiraRoute =
@@ -35,19 +46,14 @@ const PesquisaTransicaoCarreiraRoute =
     path: '/pesquisa-transicao-carreira',
     getParentRoute: () => rootRouteImport,
   } as any)
-const NewsSitemapDotxmlRoute = NewsSitemapDotxmlRouteImport.update({
-  id: '/news-sitemap.xml',
-  path: '/news-sitemap.xml',
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BuscaRoute = BuscaRouteImport.update({
-  id: '/busca',
-  path: '/busca',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
@@ -55,24 +61,9 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PerfilSlugRoute = PerfilSlugRouteImport.update({
-  id: '/perfil/$slug',
-  path: '/perfil/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MateriaSlugRoute = MateriaSlugRouteImport.update({
-  id: '/materia/$slug',
-  path: '/materia/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const InstitucionalPageRoute = InstitucionalPageRouteImport.update({
-  id: '/institucional/$page',
-  path: '/institucional/$page',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CategoriaSlugRoute = CategoriaSlugRouteImport.update({
-  id: '/categoria/$slug',
-  path: '/categoria/$slug',
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin/login',
+  path: '/admin/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminPesquisaRoute = AdminPesquisaRouteImport.update({
@@ -80,19 +71,34 @@ const AdminPesquisaRoute = AdminPesquisaRouteImport.update({
   path: '/admin/pesquisa',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminLoginRoute = AdminLoginRouteImport.update({
-  id: '/admin/login',
-  path: '/admin/login',
+const CategoriaSlugRoute = CategoriaSlugRouteImport.update({
+  id: '/categoria/$slug',
+  path: '/categoria/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminMateriasNovaRoute = AdminMateriasNovaRouteImport.update({
-  id: '/admin/materias/nova',
-  path: '/admin/materias/nova',
+const InstitucionalPageRoute = InstitucionalPageRouteImport.update({
+  id: '/institucional/$page',
+  path: '/institucional/$page',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MateriaSlugRoute = MateriaSlugRouteImport.update({
+  id: '/materia/$slug',
+  path: '/materia/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PerfilSlugRoute = PerfilSlugRouteImport.update({
+  id: '/perfil/$slug',
+  path: '/perfil/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminMateriasSlugRoute = AdminMateriasSlugRouteImport.update({
   id: '/admin/materias/$slug',
   path: '/admin/materias/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminMateriasNovaRoute = AdminMateriasNovaRouteImport.update({
+  id: '/admin/materias/nova',
+  path: '/admin/materias/nova',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -101,6 +107,7 @@ export interface FileRoutesByFullPath {
   '/busca': typeof BuscaRoute
   '/news-sitemap.xml': typeof NewsSitemapDotxmlRoute
   '/pesquisa-transicao-carreira': typeof PesquisaTransicaoCarreiraRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/pesquisa': typeof AdminPesquisaRoute
@@ -117,6 +124,7 @@ export interface FileRoutesByTo {
   '/busca': typeof BuscaRoute
   '/news-sitemap.xml': typeof NewsSitemapDotxmlRoute
   '/pesquisa-transicao-carreira': typeof PesquisaTransicaoCarreiraRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/pesquisa': typeof AdminPesquisaRoute
@@ -134,6 +142,7 @@ export interface FileRoutesById {
   '/busca': typeof BuscaRoute
   '/news-sitemap.xml': typeof NewsSitemapDotxmlRoute
   '/pesquisa-transicao-carreira': typeof PesquisaTransicaoCarreiraRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/pesquisa': typeof AdminPesquisaRoute
@@ -152,6 +161,7 @@ export interface FileRouteTypes {
     | '/busca'
     | '/news-sitemap.xml'
     | '/pesquisa-transicao-carreira'
+    | '/reset-password'
     | '/sitemap.xml'
     | '/admin/login'
     | '/admin/pesquisa'
@@ -168,6 +178,7 @@ export interface FileRouteTypes {
     | '/busca'
     | '/news-sitemap.xml'
     | '/pesquisa-transicao-carreira'
+    | '/reset-password'
     | '/sitemap.xml'
     | '/admin/login'
     | '/admin/pesquisa'
@@ -184,6 +195,7 @@ export interface FileRouteTypes {
     | '/busca'
     | '/news-sitemap.xml'
     | '/pesquisa-transicao-carreira'
+    | '/reset-password'
     | '/sitemap.xml'
     | '/admin/login'
     | '/admin/pesquisa'
@@ -201,6 +213,7 @@ export interface RootRouteChildren {
   BuscaRoute: typeof BuscaRoute
   NewsSitemapDotxmlRoute: typeof NewsSitemapDotxmlRoute
   PesquisaTransicaoCarreiraRoute: typeof PesquisaTransicaoCarreiraRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   AdminLoginRoute: typeof AdminLoginRoute
   AdminPesquisaRoute: typeof AdminPesquisaRoute
@@ -215,25 +228,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/pesquisa-transicao-carreira': {
-      id: '/pesquisa-transicao-carreira'
-      path: '/pesquisa-transicao-carreira'
-      fullPath: '/pesquisa-transicao-carreira'
-      preLoaderRoute: typeof PesquisaTransicaoCarreiraRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/news-sitemap.xml': {
-      id: '/news-sitemap.xml'
-      path: '/news-sitemap.xml'
-      fullPath: '/news-sitemap.xml'
-      preLoaderRoute: typeof NewsSitemapDotxmlRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/busca': {
@@ -243,11 +242,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BuscaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/news-sitemap.xml': {
+      id: '/news-sitemap.xml'
+      path: '/news-sitemap.xml'
+      fullPath: '/news-sitemap.xml'
+      preLoaderRoute: typeof NewsSitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pesquisa-transicao-carreira': {
+      id: '/pesquisa-transicao-carreira'
+      path: '/pesquisa-transicao-carreira'
+      fullPath: '/pesquisa-transicao-carreira'
+      preLoaderRoute: typeof PesquisaTransicaoCarreiraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -257,32 +277,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/perfil/$slug': {
-      id: '/perfil/$slug'
-      path: '/perfil/$slug'
-      fullPath: '/perfil/$slug'
-      preLoaderRoute: typeof PerfilSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/materia/$slug': {
-      id: '/materia/$slug'
-      path: '/materia/$slug'
-      fullPath: '/materia/$slug'
-      preLoaderRoute: typeof MateriaSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/institucional/$page': {
-      id: '/institucional/$page'
-      path: '/institucional/$page'
-      fullPath: '/institucional/$page'
-      preLoaderRoute: typeof InstitucionalPageRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/categoria/$slug': {
-      id: '/categoria/$slug'
-      path: '/categoria/$slug'
-      fullPath: '/categoria/$slug'
-      preLoaderRoute: typeof CategoriaSlugRouteImport
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/pesquisa': {
@@ -292,18 +291,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPesquisaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/login': {
-      id: '/admin/login'
-      path: '/admin/login'
-      fullPath: '/admin/login'
-      preLoaderRoute: typeof AdminLoginRouteImport
+    '/categoria/$slug': {
+      id: '/categoria/$slug'
+      path: '/categoria/$slug'
+      fullPath: '/categoria/$slug'
+      preLoaderRoute: typeof CategoriaSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/materias/nova': {
-      id: '/admin/materias/nova'
-      path: '/admin/materias/nova'
-      fullPath: '/admin/materias/nova'
-      preLoaderRoute: typeof AdminMateriasNovaRouteImport
+    '/institucional/$page': {
+      id: '/institucional/$page'
+      path: '/institucional/$page'
+      fullPath: '/institucional/$page'
+      preLoaderRoute: typeof InstitucionalPageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/materia/$slug': {
+      id: '/materia/$slug'
+      path: '/materia/$slug'
+      fullPath: '/materia/$slug'
+      preLoaderRoute: typeof MateriaSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/perfil/$slug': {
+      id: '/perfil/$slug'
+      path: '/perfil/$slug'
+      fullPath: '/perfil/$slug'
+      preLoaderRoute: typeof PerfilSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/materias/$slug': {
@@ -311,6 +324,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/materias/$slug'
       fullPath: '/admin/materias/$slug'
       preLoaderRoute: typeof AdminMateriasSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/materias/nova': {
+      id: '/admin/materias/nova'
+      path: '/admin/materias/nova'
+      fullPath: '/admin/materias/nova'
+      preLoaderRoute: typeof AdminMateriasNovaRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -321,6 +341,7 @@ const rootRouteChildren: RootRouteChildren = {
   BuscaRoute: BuscaRoute,
   NewsSitemapDotxmlRoute: NewsSitemapDotxmlRoute,
   PesquisaTransicaoCarreiraRoute: PesquisaTransicaoCarreiraRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   AdminLoginRoute: AdminLoginRoute,
   AdminPesquisaRoute: AdminPesquisaRoute,
@@ -335,3 +356,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
