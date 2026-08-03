@@ -37,19 +37,20 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <a
-            href="/busca"
+          <Link
+            to="/busca"
             className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-medium text-ink-soft hover:text-primary hover:border-primary transition"
             aria-label="Buscar"
           >
             <Search size={14} /> Buscar
-          </a>
-          <a
-            href="#newsletter"
+          </Link>
+          <Link
+            to="/"
+            hash="newsletter"
             className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3.5 py-1.5 text-xs font-bold text-primary-foreground hover:opacity-90 transition"
           >
             <Mail size={14} /> Newsletter
-          </a>
+          </Link>
         </div>
       </div>
 
