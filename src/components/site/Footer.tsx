@@ -40,7 +40,7 @@ export function Footer() {
             A fofoca que nunca dorme. Notícias, bastidores e curiosidades — sempre com apuração.
           </p>
           <p className="mt-3 text-[11px] uppercase tracking-widest" style={{ color: "var(--brand-yellow)" }}>
-            Conteúdo de demonstração
+            {"\n"}
           </p>
         </div>
         {cols.map((col) => (
