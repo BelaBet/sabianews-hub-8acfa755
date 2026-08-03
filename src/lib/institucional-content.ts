@@ -36,9 +36,22 @@ export const institucionalPages: Record<string, InstitucionalPage> = {
     titulo: "Política de Privacidade",
     descricao: "Como tratamos os dados de quem visita o Tá Sabendo?",
     corpo: [
-      "Coletamos apenas os dados necessários para o funcionamento do site e, quando aplicável, para o envio da newsletter — sempre com seu consentimento explícito.",
+      "Coletamos apenas os dados necessários para o funcionamento do site e, quando aplicável, para o envio da newsletter — sempre com seu consentimento explícito, registrado no momento da inscrição.",
+      "Quando você assina a newsletter, guardamos o e-mail informado, a confirmação do consentimento, a página de origem e a data da inscrição. Esses dados são usados exclusivamente para enviar a newsletter.",
+      "Exibimos publicidade por meio do Google AdSense, que pode utilizar cookies para veicular anúncios. O detalhamento está na Política de Cookies.",
       "Não vendemos dados pessoais a terceiros.",
-      "Você pode solicitar a remoção dos seus dados a qualquer momento pelo canal de contato.",
+      "Você pode solicitar acesso, correção ou remoção dos seus dados a qualquer momento pelo canal de contato, conforme a Lei Geral de Proteção de Dados (Lei 13.709/2018).",
+    ],
+  },
+  cookies: {
+    titulo: "Política de Cookies",
+    descricao: "Quais cookies o Tá Sabendo? utiliza e para quê.",
+    corpo: [
+      "Cookies são pequenos arquivos gravados no seu navegador. Usamos apenas os necessários para o funcionamento do site e os relacionados à publicidade.",
+      "Cookies essenciais mantêm sua sessão e preferências de navegação. Sem eles, partes do site deixam de funcionar.",
+      "Cookies de publicidade são definidos pelo Google AdSense, nosso parceiro de anúncios, e podem ser usados para exibir anúncios mais relevantes. O Google mantém controles próprios em myadcenter.google.com, onde você pode desativar a personalização de anúncios.",
+      "Você também pode bloquear ou apagar cookies nas configurações do seu navegador. Isso não impede a exibição de anúncios, apenas reduz a personalização deles.",
+      "Dúvidas sobre o uso de cookies podem ser enviadas pelo canal de contato.",
     ],
   },
   termos: {

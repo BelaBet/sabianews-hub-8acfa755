@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { fetchMaterias, fetchCategorias, fetchPerfis } from "@/lib/data";
 import { SITE_URL } from "@/lib/site";
+import { institucionalPages } from "@/lib/institucional-content";
 
 const BASE_URL = SITE_URL;
 
@@ -31,6 +32,14 @@ export const Route = createFileRoute("/sitemap.xml")({
             path: `/perfil/${p.slug}`,
             changefreq: "weekly",
             priority: "0.6",
+          })),
+          // Páginas institucionais (privacidade, termos, contato, cookies...).
+          // Ficavam de fora do sitemap mesmo sendo exatamente o que AdSense e
+          // Google News procuram ao avaliar um veículo.
+          ...Object.keys(institucionalPages).map((slug) => ({
+            path: `/institucional/${slug}`,
+            changefreq: "monthly",
+            priority: "0.3",
           })),
         ];
 
