@@ -61,36 +61,65 @@ function LoginPage() {
         <h1 className="font-display text-2xl font-black text-center">
           TÁ SABENDO<span className="ml-0.5 inline-block rounded-sm bg-primary px-1 text-white text-lg">?</span>
         </h1>
-        <p className="mt-1 text-center text-sm text-ink-soft">Painel Editorial</p>
+        <p className="mt-1 text-center text-sm text-ink-soft">
+          {mode === "forgot" ? "Recuperar acesso" : "Painel Editorial"}
+        </p>
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <div className="space-y-1.5">
             <Label htmlFor="email">E-mail</Label>
             <Input id="email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
           </div>
-          <div className="space-y-1.5">
-            <Label htmlFor="password">Senha</Label>
-            <Input
-              id="password"
-              type="password"
-              required
-              minLength={6}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
+          {mode !== "forgot" && (
+            <div className="space-y-1.5">
+              <Label htmlFor="password">Senha</Label>
+              <Input
+                id="password"
+                type="password"
+                required
+                minLength={6}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+          )}
 
           {error && <p className="text-sm text-destructive">{error}</p>}
           {info && <p className="text-sm text-primary">{info}</p>}
 
           <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? "Aguarde…" : mode === "login" ? "Entrar" : "Criar conta"}
+            {loading
+              ? "Aguarde…"
+              : mode === "login"
+                ? "Entrar"
+                : mode === "signup"
+                  ? "Criar conta"
+                  : "Enviar link de redefinição"}
           </Button>
         </form>
 
+        {mode === "login" && (
+          <button
+            type="button"
+            className="mt-4 w-full text-center text-xs text-ink-soft hover:text-primary"
+            onClick={() => {
+              setMode("forgot");
+              setError(null);
+              setInfo(null);
+            }}
+          >
+            Esqueci a senha
+          </button>
+        )}
+
         <button
-          className="mt-4 w-full text-center text-xs text-ink-soft hover:text-primary"
-          onClick={() => setMode(mode === "login" ? "signup" : "login")}
+          type="button"
+          className="mt-2 w-full text-center text-xs text-ink-soft hover:text-primary"
+          onClick={() => {
+            setMode(mode === "login" ? "signup" : "login");
+            setError(null);
+            setInfo(null);
+          }}
         >
           {mode === "login" ? "Primeiro acesso? Criar conta" : "Já tenho conta — entrar"}
         </button>
