@@ -1,10 +1,15 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { institucionalPages } from "@/lib/institucional-content";
 import { ChevronRight } from "lucide-react";
 
 export const Route = createFileRoute("/institucional/$page")({
+  // /institucional/anuncie virou a rota dedicada /anuncie. Redireciona em vez
+  // de 404 para não perder o que já estiver indexado ou linkado.
+  beforeLoad: ({ params }) => {
+    if (params.page === "anuncie") throw redirect({ to: "/anuncie" });
+  },
   loader: ({ params }) => {
     const page = institucionalPages[params.page];
     if (!page) throw notFound();

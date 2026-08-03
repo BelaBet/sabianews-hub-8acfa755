@@ -73,15 +73,6 @@ export const institucionalPages: Record<string, InstitucionalPage> = {
       "Respondemos o mais rápido possível — bastidores não esperam.",
     ],
   },
-  anuncie: {
-    titulo: "Anuncie",
-    descricao: "Leve sua marca para o público do Tá Sabendo?",
-    corpo: [
-      "O Tá Sabendo? conecta marcas a um público engajado e apaixonado por cultura, tecnologia e bastidores.",
-      "Trabalhamos com formatos nativos, banners e conteúdo patrocinado, sempre identificado como publicidade.",
-      "Fale com o time comercial pelo canal de contato para receber nosso media kit.",
-    ],
-  },
   carreiras: {
     titulo: "Trabalhe Conosco",
     descricao: "Vagas e oportunidades no Tá Sabendo?",

@@ -17,10 +17,7 @@ const legal: PaginaInstitucional[] = [
   { label: "Contato", page: "contato" },
 ];
 
-const negocios: PaginaInstitucional[] = [
-  { label: "Anuncie", page: "anuncie" },
-  { label: "Trabalhe Conosco", page: "carreiras" },
-];
+const negocios: PaginaInstitucional[] = [{ label: "Trabalhe Conosco", page: "carreiras" }];
 
 const linkClass = "text-white/70 transition-colors hover:text-white focus-visible:text-white";
 
@@ -74,6 +71,11 @@ export function Footer() {
                       um href="#newsletter" cru não fazia nada nas demais páginas. */}
                   <Link to="/" hash="newsletter" className={linkClass}>
                     Newsletter
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/anuncie" className={linkClass}>
+                    Anuncie
                   </Link>
                 </li>
                 <li>
