@@ -95,4 +95,4 @@ export const perfilEditorial = [
 ];
 
 /** PREENCHER: e-mail comercial que realmente recebe. */
-export const emailComercial = "";
+export const emailComercial = "comercial@sabia.blog";
