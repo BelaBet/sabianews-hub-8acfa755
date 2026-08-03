@@ -9,6 +9,7 @@ import {
   fetchAutores,
   getCategoria,
   getAutor,
+  materiasRelacionadas,
   formatarData,
 } from "@/lib/data";
 import { CheckCircle2, HelpCircle, AlertTriangle, Sparkles, Share2, ChevronRight } from "lucide-react";
