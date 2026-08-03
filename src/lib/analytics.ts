@@ -19,7 +19,16 @@
  * "granted" e a medição virar completa.
  */
 
-export const GA_MEASUREMENT_ID: string | undefined = import.meta.env.VITE_GA_MEASUREMENT_ID;
+// Fallback hardcoded, no mesmo padrão de SITE_URL (lib/site.ts) e das chaves
+// do Supabase (lib/supabase.ts): a propriedade GA4 já existe e este é o
+// Measurement ID de produção, então o site mede tráfego mesmo se o deploy
+// não tiver VITE_GA_MEASUREMENT_ID configurada. Para apontar outra
+// propriedade (ex.: ambiente de staging), defina a env var — ela sempre
+// tem prioridade sobre o fallback.
+const FALLBACK_GA_MEASUREMENT_ID = "G-BZLKD1M4LS";
+
+export const GA_MEASUREMENT_ID: string | undefined =
+  import.meta.env.VITE_GA_MEASUREMENT_ID || FALLBACK_GA_MEASUREMENT_ID;
 export const GSC_VERIFICATION: string | undefined = import.meta.env.VITE_GSC_VERIFICATION;
 
 declare global {
