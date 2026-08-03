@@ -34,8 +34,20 @@ export const Route = createFileRoute("/news-sitemap.xml")({
             if (Number.isNaN(publicado)) return false;
             return (now - publicado) / 86400000 <= MAX_AGE_DAYS;
           })
-          .sort((a, b) => b.publicadoEm.localeCompare(a.publicadoEm))
-          .slice(0, 1000);
+          .sort((a, b) => b.publicadoEm.localeCompare(a.publicadoEm));
+
+        // Se não houver matérias nas últimas 48h, expande a janela para o fallback
+        // para que o sitemap nunca fique vazio, mas mantém o limite de 1000 URLs.
+        const selecionadas = (recentes.length > 0
+          ? recentes
+          : materias
+              .filter((m) => {
+                const publicado = new Date(m.publicadoEm).getTime();
+                if (Number.isNaN(publicado)) return false;
+                return (now - publicado) / 86400000 <= FALLBACK_MAX_AGE_DAYS;
+              })
+              .sort((a, b) => b.publicadoEm.localeCompare(a.publicadoEm))
+        ).slice(0, 1000);
 
         const urls = recentes.map((m) => {
           const publicado = new Date(m.publicadoEm).toISOString();
