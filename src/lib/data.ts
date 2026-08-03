@@ -224,3 +224,24 @@ export function formatarData(iso: string) {
     minute: "2-digit",
   });
 }
+
+// Relacionadas: pontua por tags em comum (peso 3), mesma categoria (peso 2)
+// e recência, para sugerir leituras próximas ao fim da matéria.
+export function materiasRelacionadas(materias: Materia[], atual: Materia, limit = 6) {
+  const tagsAtual = new Set((atual.tags ?? []).map((t) => t.toLowerCase()));
+  const agora = Date.now();
+
+  return materias
+    .filter((x) => x.slug !== atual.slug)
+    .map((x) => {
+      const tagsComuns = (x.tags ?? []).filter((t) => tagsAtual.has(t.toLowerCase())).length;
+      const mesmaCategoria = x.categoria === atual.categoria ? 1 : 0;
+      const dias = Math.max(0, (agora - new Date(x.publicadoEm).getTime()) / 86_400_000);
+      const recencia = Math.max(0, 1 - dias / 90);
+      return { m: x, score: tagsComuns * 3 + mesmaCategoria * 2 + recencia };
+    })
+    .filter((x) => x.score > 0)
+    .sort((a, b) => b.score - a.score || b.m.publicadoEm.localeCompare(a.m.publicadoEm))
+    .slice(0, limit)
+    .map((x) => x.m);
+}
