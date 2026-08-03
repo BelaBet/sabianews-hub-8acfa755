@@ -14,6 +14,7 @@ import {
 } from "@/lib/data";
 import { CheckCircle2, HelpCircle, AlertTriangle, Sparkles, Share2, ChevronRight } from "lucide-react";
 import { AdSlot } from "@/components/site/AdSlot";
+import { ProdutoCTA } from "@/components/site/ProdutoCTA";
 
 export const Route = createFileRoute("/materia/$slug")({
   loader: async ({ params }) => {
@@ -211,6 +212,8 @@ function MateriaPage() {
                 <p className="mt-3 text-lg font-semibold leading-snug">{m.taSabendoDisso}</p>
               </aside>
             )}
+
+            <ProdutoCTA categoriaSlug={m.categoria} />
 
             <AdSlot format="in-article" label="Publicidade" />
 
