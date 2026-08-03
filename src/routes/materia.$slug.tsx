@@ -9,6 +9,7 @@ import {
   fetchAutores,
   getCategoria,
   getAutor,
+  materiasRelacionadas,
   formatarData,
 } from "@/lib/data";
 import { CheckCircle2, HelpCircle, AlertTriangle, Sparkles, Share2, ChevronRight } from "lucide-react";
@@ -23,7 +24,7 @@ export const Route = createFileRoute("/materia/$slug")({
       fetchAutores(),
     ]);
     if (!m) throw notFound();
-    return { materia: m, materias, categorias, autores };
+    return { materia: m, materias, categorias, autores, relacionadas: materiasRelacionadas(materias, m, 6) };
   },
   head: ({ loaderData, params }) => {
     if (!loaderData) {
@@ -107,7 +108,7 @@ const iconClassif = {
 } as const;
 
 function MateriaPage() {
-  const { materia: m, materias, categorias, autores } = Route.useLoaderData();
+  const { materia: m, materias, categorias, autores, relacionadas: relacionadasFinal } = Route.useLoaderData();
   const cat = getCategoria(categorias, m.categoria);
   const autor = getAutor(autores, m.autor);
   const relacionadas = materias.filter((x: any) => x.categoria === m.categoria && x.slug !== m.slug).slice(0, 3);
@@ -252,12 +253,37 @@ function MateriaPage() {
           </aside>
         </article>
 
-        <section className="container-editorial mt-16">
-          <h2 className="font-display text-2xl font-black border-b-2 border-ink pb-2">Continue lendo</h2>
-          <div className="mt-4 grid gap-6 md:grid-cols-3">
-            {materias.filter((x: any) => x.slug !== m.slug).slice(0, 3).map((r: any) => <ArticleCard key={r.slug} m={r} />)}
-          </div>
-        </section>
+        {relacionadasFinal.length > 0 && (
+          <section className="container-editorial mt-16" aria-labelledby="relacionadas-heading">
+            <div className="flex items-end justify-between gap-4 border-b-2 border-ink pb-2">
+              <h2 id="relacionadas-heading" className="font-display text-2xl font-black">
+                Matérias relacionadas
+              </h2>
+              {cat && (
+                <Link
+                  to="/categoria/$slug"
+                  params={{ slug: cat.slug }}
+                  className="text-xs font-bold uppercase tracking-wide text-primary hover:underline"
+                >
+                  Ver tudo em {cat.nome}
+                </Link>
+              )}
+            </div>
+            <div className="mt-4 grid gap-6 md:grid-cols-3">
+              {relacionadasFinal.map((r: any) => <ArticleCard key={r.slug} m={r} />)}
+            </div>
+            {m.tags.length > 0 && (
+              <div className="mt-6 flex flex-wrap items-center gap-2">
+                <span className="text-xs font-bold uppercase tracking-wide text-ink-soft">Assuntos:</span>
+                {m.tags.map((t: string) => (
+                  <span key={t} className="rounded-full border border-ink/15 px-3 py-1 text-xs text-ink-soft">
+                    #{t}
+                  </span>
+                ))}
+              </div>
+            )}
+          </section>
+        )}
       </main>
       <Footer />
     </div>
