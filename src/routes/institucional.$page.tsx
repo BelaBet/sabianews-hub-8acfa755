@@ -21,7 +21,7 @@ export const Route = createFileRoute("/institucional/$page")({
     };
   },
   notFoundComponent: () => (
-    <div className="min-h-screen flex flex-col">
+    <div className="blog-shell flex min-h-screen flex-col">
       <Header />
       <div className="container-editorial flex-1 py-24 text-center">
         <h1 className="text-4xl font-black">Página não encontrada</h1>
@@ -36,7 +36,7 @@ export const Route = createFileRoute("/institucional/$page")({
 function InstitucionalPage() {
   const { page } = Route.useLoaderData();
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="blog-shell flex min-h-screen flex-col">
       <Header />
       <main className="flex-1">
         <div className="container-editorial pt-6">

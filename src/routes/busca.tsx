@@ -39,7 +39,7 @@ function BuscaPage() {
   }, [materias, termo]);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="blog-shell flex min-h-screen flex-col">
       <Header />
       <main className="flex-1">
         <div className="container-editorial pt-10 max-w-2xl">
@@ -64,7 +64,7 @@ function BuscaPage() {
           ) : resultados.length === 0 ? (
             <p className="text-ink-soft">Nenhum resultado para "{termo}".</p>
           ) : (
-            <div className="grid gap-6 md:grid-cols-3">
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {resultados.map((m) => <ArticleCard key={m.slug} m={m} />)}
             </div>
           )}

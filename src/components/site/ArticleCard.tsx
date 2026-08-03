@@ -99,15 +99,15 @@ export function ArticleCard({
         <CardImage
           m={m}
           priority={priority ?? true}
-          className="h-[380px] md:h-[540px] w-full object-cover opacity-90 group-hover:scale-[1.02] transition duration-700"
+          className="h-[260px] w-full object-cover opacity-90 transition duration-700 group-hover:scale-[1.02] sm:h-[380px] md:h-[460px] lg:h-[540px]"
         />
         <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
-        <div className="absolute inset-x-0 bottom-0 p-6 md:p-10">
+        <div className="absolute inset-x-0 bottom-0 p-4 sm:p-6 md:p-10">
           <div className="flex flex-wrap items-center gap-2">
             {cat && <span className="category-chip">{cat.nome}</span>}
             {badge && <span className="highlight-chip">{badge}</span>}
           </div>
-          <Heading className="mt-3 font-display text-3xl md:text-5xl font-black leading-tight max-w-3xl">
+          <Heading className="mt-3 max-w-3xl font-display text-2xl font-black leading-[1.12] sm:text-3xl md:text-4xl lg:text-5xl lg:leading-tight">
             {m.titulo}
           </Heading>
           {m.subtitulo && (

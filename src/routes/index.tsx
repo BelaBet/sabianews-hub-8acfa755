@@ -64,7 +64,7 @@ function Home() {
 
   if (materias.length === 0) {
     return (
-      <div className="min-h-screen flex flex-col">
+      <div className="blog-shell flex min-h-screen flex-col">
         <Header />
         <main className="flex-1 container-editorial py-24 text-center text-ink-soft">
           Ainda não há matérias publicadas. Publique a primeira pelo{" "}
@@ -83,7 +83,7 @@ function Home() {
   const fatoOuRumor = materias.filter((m: any) => ["Confirmado", "Relatado", "Rumor"].includes(m.classificacao)).slice(0, 3);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="blog-shell flex min-h-screen flex-col">
       <Header />
       <main className="flex-1">
         <section className="container-editorial pt-6">
@@ -94,11 +94,11 @@ function Home() {
           <AdSlot format="leaderboard" label="Publicidade" />
         </section>
 
-        <section className="container-editorial mt-4 grid gap-6 md:grid-cols-3">
+        <section className="container-editorial mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {destaques.map((m: any) => <ArticleCard key={m.slug} m={m} categorias={categorias} headingLevel={2} />)}
         </section>
 
-        <section className="container-editorial mt-12 grid gap-8 lg:grid-cols-[1fr_320px]">
+        <section className="container-editorial mt-12 grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
           <div>
             <SectionTitle title="Últimas notícias" subtitle="Cronológico, atualizado em tempo real" />
             <div className="mt-4 divide-y divide-border rounded-xl border border-border bg-surface px-4">
@@ -130,7 +130,7 @@ function Home() {
         {curiosidades.length > 0 && (
           <section className="container-editorial mt-16">
             <SectionTitle title="Tá sabendo disso?" subtitle="Curiosidades rápidas e verificadas" icon={<Sparkles size={18} />} />
-            <div className="mt-4 grid gap-4 md:grid-cols-3">
+            <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {curiosidades.map((c: any) => (
                 <Link
                   key={c.slug}
