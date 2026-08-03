@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as PesquisaTransicaoCarreiraRouteImport } from './routes/pesquisa-transicao-carreira'
 import { Route as NewsSitemapDotxmlRouteImport } from './routes/news-sitemap[.]xml'
 import { Route as BuscaRouteImport } from './routes/busca'
@@ -27,6 +28,11 @@ import { Route as AdminMateriasSlugRouteImport } from './routes/admin.materias.$
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PesquisaTransicaoCarreiraRoute =
@@ -101,6 +107,7 @@ export interface FileRoutesByFullPath {
   '/busca': typeof BuscaRoute
   '/news-sitemap.xml': typeof NewsSitemapDotxmlRoute
   '/pesquisa-transicao-carreira': typeof PesquisaTransicaoCarreiraRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/pesquisa': typeof AdminPesquisaRoute
@@ -117,6 +124,7 @@ export interface FileRoutesByTo {
   '/busca': typeof BuscaRoute
   '/news-sitemap.xml': typeof NewsSitemapDotxmlRoute
   '/pesquisa-transicao-carreira': typeof PesquisaTransicaoCarreiraRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/pesquisa': typeof AdminPesquisaRoute
@@ -134,6 +142,7 @@ export interface FileRoutesById {
   '/busca': typeof BuscaRoute
   '/news-sitemap.xml': typeof NewsSitemapDotxmlRoute
   '/pesquisa-transicao-carreira': typeof PesquisaTransicaoCarreiraRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/pesquisa': typeof AdminPesquisaRoute
@@ -152,6 +161,7 @@ export interface FileRouteTypes {
     | '/busca'
     | '/news-sitemap.xml'
     | '/pesquisa-transicao-carreira'
+    | '/reset-password'
     | '/sitemap.xml'
     | '/admin/login'
     | '/admin/pesquisa'
@@ -168,6 +178,7 @@ export interface FileRouteTypes {
     | '/busca'
     | '/news-sitemap.xml'
     | '/pesquisa-transicao-carreira'
+    | '/reset-password'
     | '/sitemap.xml'
     | '/admin/login'
     | '/admin/pesquisa'
@@ -184,6 +195,7 @@ export interface FileRouteTypes {
     | '/busca'
     | '/news-sitemap.xml'
     | '/pesquisa-transicao-carreira'
+    | '/reset-password'
     | '/sitemap.xml'
     | '/admin/login'
     | '/admin/pesquisa'
@@ -201,6 +213,7 @@ export interface RootRouteChildren {
   BuscaRoute: typeof BuscaRoute
   NewsSitemapDotxmlRoute: typeof NewsSitemapDotxmlRoute
   PesquisaTransicaoCarreiraRoute: typeof PesquisaTransicaoCarreiraRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   AdminLoginRoute: typeof AdminLoginRoute
   AdminPesquisaRoute: typeof AdminPesquisaRoute
@@ -220,6 +233,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pesquisa-transicao-carreira': {
@@ -321,6 +341,7 @@ const rootRouteChildren: RootRouteChildren = {
   BuscaRoute: BuscaRoute,
   NewsSitemapDotxmlRoute: NewsSitemapDotxmlRoute,
   PesquisaTransicaoCarreiraRoute: PesquisaTransicaoCarreiraRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   AdminLoginRoute: AdminLoginRoute,
   AdminPesquisaRoute: AdminPesquisaRoute,
