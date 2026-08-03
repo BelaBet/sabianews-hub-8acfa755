@@ -1,8 +1,9 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/integrations/supabase/types";
 
-const FALLBACK_SUPABASE_URL = "https://izyiwnvroynuqsaqinug.supabase.co";
-const FALLBACK_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_t78rexxmm3P_zmX7AjOE7A_DSKq-S1Y";
+const FALLBACK_SUPABASE_URL = "https://zqisimfbyxecaavmzmfq.supabase.co";
+const FALLBACK_SUPABASE_PUBLISHABLE_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpxaXNpbWZieXhlY2Fhdm16bWZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQzODUzOTMsImV4cCI6MjA5OTk2MTM5M30.8B4xQ5Z2blzjOFJxTyg8aHzBNQKJo_G8j_XTuds_GUM";
 
 function isNewSupabaseApiKey(value: string): boolean {
   return value.startsWith("sb_publishable_") || value.startsWith("sb_secret_");
