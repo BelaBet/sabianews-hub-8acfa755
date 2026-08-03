@@ -49,7 +49,7 @@ export const Route = createFileRoute("/news-sitemap.xml")({
               .sort((a, b) => b.publicadoEm.localeCompare(a.publicadoEm))
         ).slice(0, 1000);
 
-        const urls = recentes.map((m) => {
+        const urls = selecionadas.map((m) => {
           const publicado = new Date(m.publicadoEm).toISOString();
           const atualizado = new Date(m.atualizadoEm ?? m.publicadoEm).toISOString();
           return [
