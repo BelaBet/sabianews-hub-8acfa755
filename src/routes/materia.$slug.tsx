@@ -108,7 +108,7 @@ const iconClassif = {
 } as const;
 
 function MateriaPage() {
-  const { materia: m, materias, categorias, autores } = Route.useLoaderData();
+  const { materia: m, materias, categorias, autores, relacionadas: relacionadasFinal } = Route.useLoaderData();
   const cat = getCategoria(categorias, m.categoria);
   const autor = getAutor(autores, m.autor);
   const relacionadas = materias.filter((x: any) => x.categoria === m.categoria && x.slug !== m.slug).slice(0, 3);
