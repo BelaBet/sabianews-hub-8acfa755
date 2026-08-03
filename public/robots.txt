@@ -4,5 +4,5 @@ Allow: /
 Disallow: /admin
 
 # Sitemaps
-# Sitemap: https://YOUR-DOMAIN/sitemap.xml
-# Sitemap: https://YOUR-DOMAIN/news-sitemap.xml
+Sitemap: https://sabia.blog/sitemap.xml
+Sitemap: https://sabia.blog/news-sitemap.xml
