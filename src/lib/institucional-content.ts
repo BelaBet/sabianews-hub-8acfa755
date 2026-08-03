@@ -68,7 +68,8 @@ export const institucionalPages: Record<string, InstitucionalPage> = {
     descricao: "Fale com a redação do Tá Sabendo?",
     corpo: [
       "Tem uma pauta, uma correção ou quer enviar um furo? Fale com a nossa redação.",
-      "E-mail: redacao@tasabendo.com.br",
+      "E-mail editorial: redacao@tasabendo.com.br",
+      "E-mail comercial: comercial@sabia.blog",
       "Respondemos o mais rápido possível — bastidores não esperam.",
     ],
   },
