@@ -28,7 +28,7 @@ export const Route = createFileRoute("/categoria/$slug")({
     };
   },
   notFoundComponent: () => (
-    <div className="min-h-screen flex flex-col">
+    <div className="blog-shell flex min-h-screen flex-col">
       <Header />
       <div className="container-editorial flex-1 py-24 text-center">
         <h1 className="text-4xl font-black">Categoria não encontrada</h1>
@@ -44,7 +44,7 @@ function CategoriaPage() {
   const { cat, lista } = Route.useLoaderData();
   const [primeira, ...resto] = lista;
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="blog-shell flex min-h-screen flex-col">
       <Header />
       <main className="flex-1">
         <div className="container-editorial pt-6">
@@ -57,7 +57,7 @@ function CategoriaPage() {
 
         <header className="container-editorial mt-6 border-b-2 border-ink pb-6">
           <span className="highlight-chip">Editoria</span>
-          <h1 className="mt-3 font-display text-4xl md:text-6xl font-black">{cat.nome}</h1>
+          <h1 className="mt-3 font-display text-3xl font-black sm:text-4xl lg:text-6xl">{cat.nome}</h1>
           <p className="mt-2 max-w-2xl text-ink-soft">{cat.descricao}</p>
         </header>
 
@@ -71,9 +71,9 @@ function CategoriaPage() {
           </div>
         ) : (
           <>
-            <section className="container-editorial mt-2 grid gap-8 lg:grid-cols-[1fr_1fr]">
+            <section className="container-editorial mt-2 grid gap-8 xl:grid-cols-2">
               {primeira && <ArticleCard m={primeira} variant="hero" categorias={[cat]} headingLevel={2} badge="Destaque" priority />}
-              <div className="grid gap-6 sm:grid-cols-2">
+              <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-2">
                 {resto.map((m: any) => <ArticleCard key={m.slug} m={m} categorias={[cat]} headingLevel={2} />)}
               </div>
             </section>

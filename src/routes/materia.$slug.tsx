@@ -83,7 +83,7 @@ export const Route = createFileRoute("/materia/$slug")({
     };
   },
   notFoundComponent: () => (
-    <div className="min-h-screen flex flex-col">
+    <div className="blog-shell flex min-h-screen flex-col">
       <Header />
       <div className="container-editorial flex-1 py-24 text-center">
         <h1 className="text-4xl font-black">Matéria não encontrada</h1>
@@ -115,7 +115,7 @@ function MateriaPage() {
   const Icon = iconClassif[m.classificacao as keyof typeof iconClassif];
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="blog-shell flex min-h-screen flex-col">
       <Header />
       <main className="flex-1">
         <div className="container-editorial pt-6">
@@ -134,7 +134,7 @@ function MateriaPage() {
           </nav>
         </div>
 
-        <article className="container-editorial mt-6 grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px]">
+        <article className="container-editorial mt-6 grid gap-10 lg:grid-cols-[minmax(0,1fr)_300px] xl:grid-cols-[minmax(0,1fr)_320px]">
           <div className="min-w-0">
             <header>
               <div className="flex flex-wrap items-center gap-2">
@@ -143,7 +143,7 @@ function MateriaPage() {
                   <Icon size={12} /> {m.classificacao}
                 </span>
               </div>
-              <h1 className="mt-4 font-display text-3xl md:text-5xl font-black leading-[1.05]">{m.titulo}</h1>
+              <h1 className="mt-4 font-display text-[1.75rem] font-black leading-[1.12] sm:text-4xl sm:leading-[1.08] lg:text-5xl lg:leading-[1.05]">{m.titulo}</h1>
               <p className="mt-3 text-lg text-ink-soft">{m.subtitulo}</p>
 
               <div className="mt-5 flex flex-wrap items-center gap-3 text-sm text-ink-soft border-y border-border py-3">
@@ -269,7 +269,7 @@ function MateriaPage() {
                 </Link>
               )}
             </div>
-            <div className="mt-4 grid gap-6 md:grid-cols-3">
+            <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {relacionadasFinal.map((r: any) => <ArticleCard key={r.slug} m={r} categorias={categorias} />)}
             </div>
             {m.tags.length > 0 && (

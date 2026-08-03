@@ -48,7 +48,7 @@ export const Route = createFileRoute("/perfil/$slug")({
     };
   },
   notFoundComponent: () => (
-    <div className="min-h-screen flex flex-col">
+    <div className="blog-shell flex min-h-screen flex-col">
       <Header />
       <div className="container-editorial flex-1 py-24 text-center">
         <h1 className="text-4xl font-black">Perfil não encontrado</h1>
@@ -71,7 +71,7 @@ function PerfilPage() {
     : materias.filter((m: any) => m.autor === autor!.slug);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="blog-shell flex min-h-screen flex-col">
       <Header />
       <main className="flex-1">
         <section className="bg-brand-black text-white">
@@ -117,7 +117,7 @@ function PerfilPage() {
             {perfil ? "Cobertura relacionada" : "Matérias do autor"}
           </h2>
           {rel.length ? (
-            <div className="mt-4 grid gap-6 md:grid-cols-3">
+            <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {rel.map((m: any) => <ArticleCard key={m.slug} m={m} categorias={categorias} headingLevel={3} />)}
             </div>
           ) : (

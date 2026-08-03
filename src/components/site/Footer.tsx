@@ -24,7 +24,11 @@ const negocios: PaginaInstitucional[] = [
 
 const linkClass = "text-white/70 transition-colors hover:text-white focus-visible:text-white";
 
-function ColunaInstitucional({ titulo, itens, extra }: {
+function ColunaInstitucional({
+  titulo,
+  itens,
+  extra,
+}: {
   titulo: string;
   itens: PaginaInstitucional[];
   extra?: React.ReactNode;
@@ -49,7 +53,7 @@ function ColunaInstitucional({ titulo, itens, extra }: {
 export function Footer() {
   return (
     <footer className="mt-16 border-t border-border bg-brand-black text-white">
-      <div className="container-editorial py-12 grid gap-10 md:grid-cols-4">
+      <div className="container-editorial grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <Logo size="md" invert />
           <p className="mt-3 text-sm text-white/70 max-w-xs">
@@ -85,15 +89,29 @@ export function Footer() {
 
       <div className="border-t border-white/10">
         <div className="container-editorial py-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 text-xs text-white/50">
-          <span>© {new Date().getFullYear()} {SITE_NAME} — Todos os direitos reservados.</span>
+          <span>
+            © {new Date().getFullYear()} {SITE_NAME} — Todos os direitos reservados.
+          </span>
           <nav aria-label="Links legais" className="flex flex-wrap items-center gap-x-4 gap-y-1">
-            <Link to="/institucional/$page" params={{ page: "privacidade" }} className="hover:text-white/80">
+            <Link
+              to="/institucional/$page"
+              params={{ page: "privacidade" }}
+              className="hover:text-white/80"
+            >
               Privacidade
             </Link>
-            <Link to="/institucional/$page" params={{ page: "termos" }} className="hover:text-white/80">
+            <Link
+              to="/institucional/$page"
+              params={{ page: "termos" }}
+              className="hover:text-white/80"
+            >
               Termos
             </Link>
-            <Link to="/institucional/$page" params={{ page: "contato" }} className="hover:text-white/80">
+            <Link
+              to="/institucional/$page"
+              params={{ page: "contato" }}
+              className="hover:text-white/80"
+            >
               Contato
             </Link>
           </nav>
