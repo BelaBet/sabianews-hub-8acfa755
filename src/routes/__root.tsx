@@ -7,17 +7,12 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import {
-  SITE_NAME,
-  SITE_TITLE,
-  SITE_DESCRIPTION,
-  OG_IMAGE,
-  OG_IMAGE_ALT,
-} from "../lib/site";
+import { SITE_NAME, SITE_TITLE, SITE_DESCRIPTION, OG_IMAGE, OG_IMAGE_ALT } from "../lib/site";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { GA_MEASUREMENT_ID, GSC_VERIFICATION, isAdminPath, trackPageview } from "../lib/analytics";
 
 function NotFoundComponent() {
   return (
@@ -105,6 +100,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:description", content: SITE_DESCRIPTION },
       { name: "twitter:image", content: OG_IMAGE },
       { name: "twitter:image:alt", content: OG_IMAGE_ALT },
+      ...(GSC_VERIFICATION
+        ? [{ name: "google-site-verification", content: GSC_VERIFICATION }]
+        : []),
     ],
     links: [
       {
@@ -120,6 +118,32 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1835156303958788",
         crossorigin: "anonymous",
       },
+      ...(GA_MEASUREMENT_ID
+        ? [
+            {
+              // Consent Mode v2 tem que ser declarado ANTES do gtag.js carregar,
+              // ou a primeira leitura já sai sem o default aplicado.
+              children: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('consent', 'default', {
+                  ad_storage: 'denied',
+                  analytics_storage: 'denied',
+                  wait_for_update: 500,
+                });
+                gtag('js', new Date());
+                gtag('config', '${GA_MEASUREMENT_ID}', {
+                  send_page_view: false,
+                  anonymize_ip: true,
+                });
+              `,
+            },
+            {
+              async: true,
+              src: `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`,
+            },
+          ]
+        : []),
     ],
   }),
   shellComponent: RootShell,
@@ -147,8 +171,31 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <Analytics />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
     </QueryClientProvider>
   );
+}
+
+/**
+ * Dispara page_view a cada navegação client-side. A primeira visita já é
+ * medida pelo próprio gtag.js na carga inicial da página; este efeito cobre
+ * as trocas de rota subsequentes, que são SPA e não recarregam o script.
+ * Ignora rotas de /admin — ver isAdminPath em lib/analytics.
+ */
+function Analytics() {
+  const router = useRouter();
+  const lastPath = useRef<string | null>(null);
+
+  useEffect(() => {
+    return router.subscribe("onResolved", () => {
+      const { pathname, searchStr } = router.state.location;
+      if (pathname === lastPath.current) return;
+      lastPath.current = pathname;
+      trackPageview(pathname, searchStr);
+    });
+  }, [router]);
+
+  return null;
 }
