@@ -173,6 +173,36 @@ export type Database = {
           },
         ]
       }
+      newsletter_inscricoes: {
+        Row: {
+          cancelado_em: string | null
+          confirmado_em: string | null
+          consentimento: boolean
+          created_at: string
+          email: string
+          id: string
+          origem: string | null
+        }
+        Insert: {
+          cancelado_em?: string | null
+          confirmado_em?: string | null
+          consentimento?: boolean
+          created_at?: string
+          email: string
+          id?: string
+          origem?: string | null
+        }
+        Update: {
+          cancelado_em?: string | null
+          confirmado_em?: string | null
+          consentimento?: boolean
+          created_at?: string
+          email?: string
+          id?: string
+          origem?: string | null
+        }
+        Relationships: []
+      }
       perfis: {
         Row: {
           created_at: string
