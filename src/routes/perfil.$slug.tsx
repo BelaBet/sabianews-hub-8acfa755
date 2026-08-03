@@ -2,19 +2,20 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ArticleCard } from "@/components/site/ArticleCard";
-import { fetchPerfilBySlug, fetchAutores, fetchMaterias, getAutor } from "@/lib/data";
+import { fetchPerfilBySlug, fetchAutores, fetchMaterias, fetchCategorias, getAutor } from "@/lib/data";
 import { AdSlot } from "@/components/site/AdSlot";
 
 export const Route = createFileRoute("/perfil/$slug")({
   loader: async ({ params }) => {
-    const [perfil, autores, materias] = await Promise.all([
+    const [perfil, autores, materias, categorias] = await Promise.all([
       fetchPerfilBySlug(params.slug),
       fetchAutores(),
       fetchMaterias(),
+      fetchCategorias(),
     ]);
     const autor = getAutor(autores, params.slug);
     if (!perfil && !autor) throw notFound();
-    return { perfil, autor, materias };
+    return { perfil, autor, materias, categorias };
   },
   head: ({ loaderData, params }) => {
     if (!loaderData) return { meta: [{ title: "Perfil" }, { name: "robots", content: "noindex" }] };
@@ -47,7 +48,7 @@ export const Route = createFileRoute("/perfil/$slug")({
     };
   },
   notFoundComponent: () => (
-    <div className="min-h-screen flex flex-col">
+    <div className="blog-shell flex min-h-screen flex-col">
       <Header />
       <div className="container-editorial flex-1 py-24 text-center">
         <h1 className="text-4xl font-black">Perfil não encontrado</h1>
@@ -60,7 +61,7 @@ export const Route = createFileRoute("/perfil/$slug")({
 });
 
 function PerfilPage() {
-  const { perfil, autor, materias } = Route.useLoaderData();
+  const { perfil, autor, materias, categorias } = Route.useLoaderData();
   const nome = perfil?.nome ?? autor!.nome;
   const desc = perfil?.descricao ?? autor!.bio;
   const tipo = perfil?.tipo ?? autor?.cargo ?? "Autor";
@@ -70,7 +71,7 @@ function PerfilPage() {
     : materias.filter((m: any) => m.autor === autor!.slug);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="blog-shell flex min-h-screen flex-col">
       <Header />
       <main className="flex-1">
         <section className="bg-brand-black text-white">
@@ -116,8 +117,8 @@ function PerfilPage() {
             {perfil ? "Cobertura relacionada" : "Matérias do autor"}
           </h2>
           {rel.length ? (
-            <div className="mt-4 grid gap-6 md:grid-cols-3">
-              {rel.map((m: any) => <ArticleCard key={m.slug} m={m} />)}
+            <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {rel.map((m: any) => <ArticleCard key={m.slug} m={m} categorias={categorias} headingLevel={3} />)}
             </div>
           ) : (
             <p className="mt-4 text-ink-soft">Sem matérias relacionadas no momento.</p>
