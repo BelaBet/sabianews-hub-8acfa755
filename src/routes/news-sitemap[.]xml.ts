@@ -2,9 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { fetchMaterias } from "@/lib/data";
 
-// TODO: replace with your project URL once a project name or custom domain is set.
-const BASE_URL = "";
+const BASE_URL = "https://sabia.blog";
+// Google News só considera conteúdo publicado nas últimas 48 horas.
 const MAX_AGE_DAYS = 2;
+
+const escapeXml = (value: string) =>
+  value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 
 export const Route = createFileRoute("/news-sitemap.xml")({
   server: {
@@ -12,31 +19,43 @@ export const Route = createFileRoute("/news-sitemap.xml")({
       GET: async () => {
         let materias: Awaited<ReturnType<typeof fetchMaterias>> = [];
         try {
+          // fetchMaterias já retorna apenas status Publicada/Atualizada
           materias = await fetchMaterias();
         } catch (e) {
           console.error("news-sitemap: failed to fetch matérias", e);
         }
+
         const now = Date.now();
-        const recentes = materias.filter(
-          (m) => (now - new Date(m.publicadoEm).getTime()) / 86400000 <= MAX_AGE_DAYS * 30,
-        );
+        const recentes = materias
+          .filter((m) => {
+            const publicado = new Date(m.publicadoEm).getTime();
+            if (Number.isNaN(publicado)) return false;
+            return (now - publicado) / 86400000 <= MAX_AGE_DAYS;
+          })
+          .sort((a, b) => b.publicadoEm.localeCompare(a.publicadoEm))
+          .slice(0, 1000);
 
-
-        const urls = recentes.map((m) =>
-          [
+        const urls = recentes.map((m) => {
+          const publicado = new Date(m.publicadoEm).toISOString();
+          const atualizado = new Date(m.atualizadoEm ?? m.publicadoEm).toISOString();
+          return [
             `  <url>`,
-            `    <loc>${BASE_URL}/materia/${m.slug}</loc>`,
+            `    <loc>${BASE_URL}/materia/${escapeXml(m.slug)}</loc>`,
+            `    <lastmod>${atualizado}</lastmod>`,
             `    <news:news>`,
             `      <news:publication>`,
             `        <news:name>Tá Sabendo?</news:name>`,
             `        <news:language>pt-BR</news:language>`,
             `      </news:publication>`,
-            `      <news:publication_date>${m.publicadoEm}</news:publication_date>`,
+            `      <news:publication_date>${publicado}</news:publication_date>`,
             `      <news:title><![CDATA[${m.titulo}]]></news:title>`,
+            m.tags.length ? `      <news:keywords>${escapeXml(m.tags.join(", "))}</news:keywords>` : null,
             `    </news:news>`,
             `  </url>`,
-          ].join("\n"),
-        );
+          ]
+            .filter(Boolean)
+            .join("\n");
+        });
 
         const xml = [
           `<?xml version="1.0" encoding="UTF-8"?>`,
