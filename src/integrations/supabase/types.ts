@@ -14,6 +14,75 @@ export type Database = {
   }
   public: {
     Tables: {
+      articles: {
+        Row: {
+          author_name: string
+          category: string
+          content_markdown: string
+          created_at: string
+          excerpt: string | null
+          faq: Json
+          featured_image: string | null
+          featured_image_alt: string | null
+          id: string
+          is_featured: boolean
+          meta_description: string | null
+          primary_keyword: string | null
+          published_at: string | null
+          secondary_keywords: Json
+          seo_title: string | null
+          slug: string
+          status: string
+          tags: Json
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author_name?: string
+          category: string
+          content_markdown: string
+          created_at?: string
+          excerpt?: string | null
+          faq?: Json
+          featured_image?: string | null
+          featured_image_alt?: string | null
+          id?: string
+          is_featured?: boolean
+          meta_description?: string | null
+          primary_keyword?: string | null
+          published_at?: string | null
+          secondary_keywords?: Json
+          seo_title?: string | null
+          slug: string
+          status?: string
+          tags?: Json
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author_name?: string
+          category?: string
+          content_markdown?: string
+          created_at?: string
+          excerpt?: string | null
+          faq?: Json
+          featured_image?: string | null
+          featured_image_alt?: string | null
+          id?: string
+          is_featured?: boolean
+          meta_description?: string | null
+          primary_keyword?: string | null
+          published_at?: string | null
+          secondary_keywords?: Json
+          seo_title?: string | null
+          slug?: string
+          status?: string
+          tags?: Json
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       autores: {
         Row: {
           bio: string
