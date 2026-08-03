@@ -25,7 +25,7 @@
 // não tiver VITE_GA_MEASUREMENT_ID configurada. Para apontar outra
 // propriedade (ex.: ambiente de staging), defina a env var — ela sempre
 // tem prioridade sobre o fallback.
-const FALLBACK_GA_MEASUREMENT_ID = "G-BZLKD1M4LS";
+const FALLBACK_GA_MEASUREMENT_ID = "G-MLZG3D3YNB";
 
 export const GA_MEASUREMENT_ID: string | undefined =
   import.meta.env.VITE_GA_MEASUREMENT_ID || FALLBACK_GA_MEASUREMENT_ID;
