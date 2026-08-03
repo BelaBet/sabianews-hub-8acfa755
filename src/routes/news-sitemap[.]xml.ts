@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { fetchMaterias } from "@/lib/data";
+import { SITE_URL, SITE_NAME } from "@/lib/site";
 
-const BASE_URL = "https://sabia.blog";
+const BASE_URL = SITE_URL;
 // Google News só considera conteúdo publicado nas últimas 48 horas.
 const MAX_AGE_DAYS = 2;
 // Janela de fallback para evitar sitemap vazio quando não há matérias recentes.
@@ -58,7 +59,7 @@ export const Route = createFileRoute("/news-sitemap.xml")({
             `    <lastmod>${atualizado}</lastmod>`,
             `    <news:news>`,
             `      <news:publication>`,
-            `        <news:name>Tá Sabendo?</news:name>`,
+            `        <news:name>${escapeXml(SITE_NAME)}</news:name>`,
             `        <news:language>pt-BR</news:language>`,
             `      </news:publication>`,
             `      <news:publication_date>${publicado}</news:publication_date>`,
