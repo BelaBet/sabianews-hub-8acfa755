@@ -23,7 +23,7 @@ export const Route = createFileRoute("/materia/$slug")({
       fetchAutores(),
     ]);
     if (!m) throw notFound();
-    return { materia: m, materias, categorias, autores };
+    return { materia: m, materias, categorias, autores, relacionadas: materiasRelacionadas(materias, m, 6) };
   },
   head: ({ loaderData, params }) => {
     if (!loaderData) {
