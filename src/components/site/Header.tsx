@@ -79,7 +79,7 @@ export function Header() {
             A fofoca que nunca dorme
           </span>
           <span className="hidden sm:inline text-white/70">
-            Conteúdo de demonstração — Tá Sabendo?
+            {"\n"}
           </span>
         </div>
       </div>
