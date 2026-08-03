@@ -51,7 +51,6 @@ function ResetPasswordPage() {
       const { error } = await supabase.auth.updateUser({ password });
       if (error) throw error;
       setDone(true);
-      setTimeout(() => navigate({ to: "/admin" }), 1500);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Algo deu errado.");
     } finally {
