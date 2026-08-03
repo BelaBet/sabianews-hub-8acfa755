@@ -51,7 +51,6 @@ function ResetPasswordPage() {
       const { error } = await supabase.auth.updateUser({ password });
       if (error) throw error;
       setDone(true);
-      setTimeout(() => navigate({ to: "/admin" }), 1500);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Algo deu errado.");
     } finally {
@@ -68,9 +67,20 @@ function ResetPasswordPage() {
         <p className="mt-1 text-center text-sm text-ink-soft">Redefinir senha</p>
 
         {done ? (
-          <p className="mt-6 text-center text-sm text-primary">
-            Senha atualizada! Redirecionando para o painel…
-          </p>
+          <div className="mt-6 space-y-4 text-center">
+            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-check">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+            </div>
+            <h2 className="font-display text-lg font-bold text-ink">Senha redefinida!</h2>
+            <p className="text-sm text-ink-soft">
+              Sua nova senha foi salva com sucesso. Agora você pode fazer login no painel editorial.
+            </p>
+            <Button asChild className="w-full">
+              <Link to="/admin/login">Voltar ao login</Link>
+            </Button>
+          </div>
         ) : !ready ? (
           <p className="mt-6 text-center text-sm text-ink-soft">
             Abra esta página pelo link enviado no seu e-mail para redefinir a senha.
