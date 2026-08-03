@@ -34,6 +34,12 @@ function LoginPage() {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
         navigate({ to: "/admin" });
+      } else if (mode === "forgot") {
+        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+          redirectTo: `${window.location.origin}/reset-password`,
+        });
+        if (error) throw error;
+        setInfo("Enviamos um link de redefinição para o seu e-mail. Verifique a caixa de entrada e o spam.");
       } else {
         const { error } = await supabase.auth.signUp({ email, password });
         if (error) throw error;
