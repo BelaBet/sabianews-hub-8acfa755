@@ -39,9 +39,6 @@ export function Footer() {
           <p className="mt-3 text-sm text-white/70 max-w-xs">
             A fofoca que nunca dorme. Notícias, bastidores e curiosidades — sempre com apuração.
           </p>
-          <p className="mt-3 text-[11px] uppercase tracking-widest" style={{ color: "var(--brand-yellow)" }}>
-            {"\n"}
-          </p>
         </div>
         {cols.map((col) => (
           <div key={col.title}>
@@ -58,7 +55,7 @@ export function Footer() {
       </div>
       <div className="border-t border-white/10">
         <div className="container-editorial py-4 flex flex-wrap items-center justify-between gap-2 text-xs text-white/50">
-          <span>© {new Date().getFullYear()} Tá Sabendo? — Todos os direitos reservados (demo).</span>
+          <span>© {new Date().getFullYear()} Tá Sabendo? — Todos os direitos reservados.</span>
           <span>Feito com paixão editorial no Brasil.</span>
         </div>
       </div>

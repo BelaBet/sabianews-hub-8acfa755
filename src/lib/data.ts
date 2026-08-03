@@ -20,7 +20,7 @@ export interface ResumoRapido {
 }
 
 // Keep the field names the existing UI components already expect
-// (camelCase, matching the old demo-data.ts shape) so components
+// (camelCase) so components
 // like ArticleCard / Header / admin table don't need to change.
 
 export interface Categoria {
