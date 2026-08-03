@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { fetchMaterias, fetchCategorias, fetchPerfis } from "@/lib/data";
+import { SITE_URL } from "@/lib/site";
 
-const BASE_URL = "https://sabia.blog";
+const BASE_URL = SITE_URL;
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {

@@ -78,9 +78,6 @@ export function Header() {
           <span className="font-bold" style={{ color: "var(--brand-yellow)" }}>
             A fofoca que nunca dorme
           </span>
-          <span className="hidden sm:inline text-white/70">
-            {"\n"}
-          </span>
         </div>
       </div>
     </header>

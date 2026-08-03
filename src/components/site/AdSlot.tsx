@@ -51,6 +51,11 @@ export function AdSlot({
     }
   }, [slot]);
 
+  // Sem `slot` configurado não há anúncio para servir: não renderizamos nada.
+  // O placeholder tracejado antigo aparecia em todas as páginas e deixava o
+  // site com cara de rascunho — e reserva de espaço vazio não evita CLS, só cria.
+  if (!slot) return null;
+
   return (
     <div
       role="complementary"
@@ -61,23 +66,17 @@ export function AdSlot({
         {label}
       </span>
       <div
-        className={`relative w-full overflow-hidden rounded-md border border-dashed border-border bg-surface-alt ${FORMAT_STYLES[format]}`}
+        className={`relative w-full overflow-hidden rounded-md bg-surface-alt ${FORMAT_STYLES[format]}`}
       >
-        {slot ? (
-          <ins
-            ref={ref}
-            className="adsbygoogle block w-full h-full"
-            style={{ display: "block" }}
-            data-ad-client={CLIENT_ID}
-            data-ad-slot={slot}
-            data-ad-format="auto"
-            data-full-width-responsive="true"
-          />
-        ) : (
-          <div className="absolute inset-0 grid place-items-center text-[10px] uppercase tracking-widest text-ink-soft/60">
-            Espaço reservado
-          </div>
-        )}
+        <ins
+          ref={ref}
+          className="adsbygoogle block w-full h-full"
+          style={{ display: "block" }}
+          data-ad-client={CLIENT_ID}
+          data-ad-slot={slot}
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        />
       </div>
     </div>
   );
