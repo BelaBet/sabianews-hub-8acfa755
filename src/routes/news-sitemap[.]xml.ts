@@ -5,6 +5,8 @@ import { fetchMaterias } from "@/lib/data";
 const BASE_URL = "https://sabia.blog";
 // Google News só considera conteúdo publicado nas últimas 48 horas.
 const MAX_AGE_DAYS = 2;
+// Janela de fallback para evitar sitemap vazio quando não há matérias recentes.
+const FALLBACK_MAX_AGE_DAYS = 30;
 
 const escapeXml = (value: string) =>
   value
