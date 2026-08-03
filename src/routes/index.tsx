@@ -87,7 +87,7 @@ function Home() {
       <Header />
       <main className="flex-1">
         <section className="container-editorial pt-6">
-          <ArticleCard m={manchete} variant="hero" />
+          <ArticleCard m={manchete} variant="hero" categorias={categorias} badge="Manchete" priority />
         </section>
 
         <section className="container-editorial">
@@ -95,7 +95,7 @@ function Home() {
         </section>
 
         <section className="container-editorial mt-4 grid gap-6 md:grid-cols-3">
-          {destaques.map((m: any) => <ArticleCard key={m.slug} m={m} />)}
+          {destaques.map((m: any) => <ArticleCard key={m.slug} m={m} categorias={categorias} headingLevel={2} />)}
         </section>
 
         <section className="container-editorial mt-12 grid gap-8 lg:grid-cols-[1fr_320px]">
@@ -103,30 +103,7 @@ function Home() {
             <SectionTitle title="Últimas notícias" subtitle="Cronológico, atualizado em tempo real" />
             <div className="mt-4 divide-y divide-border rounded-xl border border-border bg-surface px-4">
               {ultimas.map((m) => (
-                <Link
-                  key={m.slug}
-                  to="/materia/$slug"
-                  params={{ slug: m.slug }}
-                  className="group flex items-start gap-4 py-4"
-                >
-                  <div className="text-xs font-mono text-ink-soft w-16 shrink-0 pt-1">
-                    {new Date(m.publicadoEm).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-primary">
-                        {getCategoria(categorias, m.categoria)?.nome}
-                      </span>
-                      {m.atualizadoEm && (
-                        <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: "var(--brand-red-deep)" }}>
-                          · Atualizada
-                        </span>
-                      )}
-                    </div>
-                    <h3 className="font-semibold text-ink group-hover:text-primary">{m.titulo}</h3>
-                    <p className="text-sm text-ink-soft line-clamp-1">{m.resumo}</p>
-                  </div>
-                </Link>
+                <ArticleCard key={m.slug} m={m} variant="list" categorias={categorias} />
               ))}
             </div>
           </div>

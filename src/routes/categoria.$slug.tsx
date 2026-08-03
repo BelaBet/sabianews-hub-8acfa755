@@ -72,9 +72,9 @@ function CategoriaPage() {
         ) : (
           <>
             <section className="container-editorial mt-2 grid gap-8 lg:grid-cols-[1fr_1fr]">
-              {primeira && <ArticleCard m={primeira} variant="hero" />}
+              {primeira && <ArticleCard m={primeira} variant="hero" categorias={[cat]} headingLevel={2} badge="Destaque" priority />}
               <div className="grid gap-6 sm:grid-cols-2">
-                {resto.map((m: any) => <ArticleCard key={m.slug} m={m} />)}
+                {resto.map((m: any) => <ArticleCard key={m.slug} m={m} categorias={[cat]} headingLevel={2} />)}
               </div>
             </section>
             <section className="container-editorial">

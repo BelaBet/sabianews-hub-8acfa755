@@ -245,7 +245,7 @@ function MateriaPage() {
             <section className="rounded-xl border border-border bg-surface p-5">
               <h2 className="font-display text-lg font-black">Relacionadas</h2>
               <div className="mt-2">
-                {relacionadas.map((r: any) => <ArticleCard key={r.slug} m={r} variant="compact" />)}
+                {relacionadas.map((r: any) => <ArticleCard key={r.slug} m={r} variant="compact" categorias={categorias} />)}
               </div>
             </section>
             <AdSlot format="halfpage" label="Publicidade" className="my-0" />
@@ -270,7 +270,7 @@ function MateriaPage() {
               )}
             </div>
             <div className="mt-4 grid gap-6 md:grid-cols-3">
-              {relacionadasFinal.map((r: any) => <ArticleCard key={r.slug} m={r} />)}
+              {relacionadasFinal.map((r: any) => <ArticleCard key={r.slug} m={r} categorias={categorias} />)}
             </div>
             {m.tags.length > 0 && (
               <div className="mt-6 flex flex-wrap items-center gap-2">
