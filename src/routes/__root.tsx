@@ -12,7 +12,12 @@ import { useEffect, useRef, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { SITE_NAME, SITE_TITLE, SITE_DESCRIPTION, OG_IMAGE, OG_IMAGE_ALT } from "../lib/site";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { GA_MEASUREMENT_ID, GSC_VERIFICATION, isAdminPath, trackPageview } from "../lib/analytics";
+import {
+  GOOGLE_TAG_ID,
+  GA_MEASUREMENT_ID,
+  GSC_VERIFICATION,
+  trackPageview,
+} from "../lib/analytics";
 
 function NotFoundComponent() {
   return (
@@ -118,11 +123,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1835156303958788",
         crossorigin: "anonymous",
       },
-      ...(GA_MEASUREMENT_ID
+      ...(GOOGLE_TAG_ID
         ? [
             {
               // Consent Mode v2 tem que ser declarado ANTES do gtag.js carregar,
               // ou a primeira leitura já sai sem o default aplicado.
+              //
+              // Carregado e configurado pelo Google Tag (GT-), não pelo
+              // Measurement ID do GA4 (G-) diretamente — são IDs
+              // "interchangeable" (doc oficial do Google), e o GT- é o
+              // container ao qual essa propriedade GA4 está ligada. Manter
+              // GA_MEASUREMENT_ID (${GA_MEASUREMENT_ID}) fora do config: um
+              // segundo gtag('config', 'G-...') aqui duplicaria o pageview,
+              // já que os dois IDs resolvem para a mesma propriedade.
               children: `
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
@@ -132,7 +145,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
                   wait_for_update: 500,
                 });
                 gtag('js', new Date());
-                gtag('config', '${GA_MEASUREMENT_ID}', {
+                gtag('config', '${GOOGLE_TAG_ID}', {
                   send_page_view: false,
                   anonymize_ip: true,
                 });
@@ -140,7 +153,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             },
             {
               async: true,
-              src: `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`,
+              src: `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_TAG_ID}`,
             },
           ]
         : []),

@@ -20,14 +20,26 @@
  */
 
 // Fallback hardcoded, no mesmo padrão de SITE_URL (lib/site.ts) e das chaves
-// do Supabase (lib/supabase.ts): a propriedade GA4 já existe e este é o
-// Measurement ID de produção, então o site mede tráfego mesmo se o deploy
-// não tiver VITE_GA_MEASUREMENT_ID configurada. Para apontar outra
-// propriedade (ex.: ambiente de staging), defina a env var — ela sempre
-// tem prioridade sobre o fallback.
+// do Supabase (lib/supabase.ts): a propriedade GA4 já existe e o site mede
+// tráfego mesmo se o deploy não tiver as env vars configuradas. Para apontar
+// outra propriedade (ex.: staging), defina a env var — ela sempre tem
+// prioridade sobre o fallback.
+//
+// Carregamos com o Google Tag (prefixo GT-), não com o Measurement ID do
+// GA4 (prefixo G-) diretamente. São tag IDs "interchangeable" segundo a doc
+// oficial (developers.google.com/tag-platform/gtagjs/configure) — o GT- é o
+// container que o Google agora emite ao lado do G-, pensado para permitir
+// ligar produtos futuros (Google Ads, Floodlight) só pela interface do
+// Google, sem precisar tocar de novo no código do site.
+const FALLBACK_GOOGLE_TAG_ID = "GT-WP45DRCV";
 const FALLBACK_GA_MEASUREMENT_ID = "G-MLZG3D3YNB";
 
-export const GA_MEASUREMENT_ID: string | undefined =
+export const GOOGLE_TAG_ID: string = import.meta.env.VITE_GOOGLE_TAG_ID || FALLBACK_GOOGLE_TAG_ID;
+/** Measurement ID do GA4. Mantido para referência e para o dia em que
+ *  precisarmos de um config explícito adicional (ex.: outra propriedade GA4
+ *  no mesmo container). Hoje o GOOGLE_TAG_ID sozinho já basta, porque é o
+ *  container ao qual essa propriedade está ligada. */
+export const GA_MEASUREMENT_ID: string =
   import.meta.env.VITE_GA_MEASUREMENT_ID || FALLBACK_GA_MEASUREMENT_ID;
 export const GSC_VERIFICATION: string | undefined = import.meta.env.VITE_GSC_VERIFICATION;
 
@@ -50,7 +62,7 @@ export function isAdminPath(pathname: string): boolean {
 
 /** Dispara pageview manual. gtag(config) já não manda automático (send_page_view: false no root), então cada navegação client-side passa por aqui. */
 export function trackPageview(pathname: string, search?: string) {
-  if (typeof window === "undefined" || !window.gtag || !GA_MEASUREMENT_ID) return;
+  if (typeof window === "undefined" || !window.gtag || !GOOGLE_TAG_ID) return;
   if (isAdminPath(pathname)) return;
   window.gtag("event", "page_view", {
     page_path: search ? `${pathname}${search}` : pathname,
